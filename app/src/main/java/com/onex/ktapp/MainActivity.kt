@@ -22,39 +22,5 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(this, "login success!", Toast.LENGTH_SHORT).show()
         }
-
-//        val login = RetrofitHelper.service.login("123","465")
-//        login.subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(object : Observer<HttpResult<LoginData>> {
-//                override fun onNext(t: HttpResult<LoginData>) {
-////                    Log.d("xxx", t.data?.toString())
-////                    textView.text = t.data?.toString()
-//                }
-//
-//                override fun onSubscribe(d: Disposable) {
-//
-//                }
-//
-//                override fun onError(e: Throwable) {
-//                    Log.e("xxx", e.message.toString())
-//                }
-//
-//                override fun onComplete() {
-//                }
-//
-//            })
-
-//        var loginIntent = Intent(this, LoginActivity::class.java)
-//
-        val btnLogin = findViewById<Button>(R.id.btn_login)
-        btnLogin.setOnClickListener {
-
-            loginViewMode.login("Onexzgj","13102119zgj") {
-                Log.d("fuck","success ok 的了")
-                Toast.makeText(this, "成功", Toast.LENGTH_SHORT).show()
-
-            }
-        }
     }
 }
