@@ -1,0 +1,51 @@
+project.afterEvaluate({
+    println("afterEvaluate=============================================================")
+    String uuid = UUID.randomUUID().toString()
+    def buildMetaDir = file(getBuildDir().getAbsolutePath() / testuuid / wps_meta_info)
+    if (buildMetaDir.exists()) {
+        buildMetaDir.delete()
+    }
+
+    buildMetaDir.mkdirs()
+    generateBuildMeta2Apk(project, buildMetaDir, uuid)
+
+})
+
+def generateBuildMeta2Apk(Project project, File buildMetaDir, String uuid) {
+
+    File metaInfoFile = new File(buildMetaDir, "1.json")
+    if (metaInfoFile.exists()) {
+        metaInfoFile.delete()
+    }
+
+    metaInfoFile.withPrintWriter("UTF-8") { printWriter ->
+        printWriter.print(metaJson)
+    }
+
+
+
+
+
+
+
+    Properties props = new Properties()
+    def dir = new File(buildMetaDir, "assets")
+    dir.mkdirs()
+    def propsFile = new File(dir, "app_build.properties")
+    props.setProperty('BUILD.UUID', uuid)
+    props.store(propsFile.newWriter(), null)
+
+
+    project.android.sourceSets.main.assets.srcDirs += [ propertiesFile.getParent() ]
+
+    project.android.applicationVariants.all { variant ->
+        variant.packageApplication.doLast {
+            def packageAndroidArtifact = variant.packageApplicationProvider.get()
+            def apkDir = packageAndroidArtifact.outputDirectory.getAsFile().get()
+            copy {
+                from ("${metaJsonFile.absolutePath}")
+                into apkDir
+            }
+        }
+    }
+}

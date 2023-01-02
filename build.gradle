@@ -1,0 +1,73 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google'}
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task onexGetProject() {
+    this.getProjects()
+}
+
+def getProjects() {
+    println '-------'
+    println 'Root Project'
+    println '-------'
+    this.getAllprojects().forEach({
+        println it.name
+    })
+}
+
+
+//project api的详解
+
+
+//project("LoginBase") { project -> println 'i am println ' + project.name }
+
+//所有工程
+allprojects {
+    group("onexzgj")
+}
+
+project("app") { project -> println 'allproject ' + project.group }
+
+//所有子工程，除了根节点
+subprojects {
+
+}
+
+//task的定义
+//    Task task(String name, Closure configureClosure);
+//task('hello',{
+//    println 'this is first task'
+//})
+// task的第二种定义
+task Ahello {
+    setGroup("onex")
+    println 'this is first task'
+}
+
+task BHello(group: 'onex', 'description': 'xxxx') {
+    println 'this is BHello task'
+}
+
+//task的定义
+this.tasks.create(name: 'onex2') {
+    setGroup("onex2")
+    setDescription("i am description")
+    println 'this is the two task'
+
+}

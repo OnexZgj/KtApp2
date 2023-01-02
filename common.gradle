@@ -1,0 +1,11 @@
+
+this.getProjects()
+
+def getProjects(){
+    println '-------'
+    println 'Root Project'
+    println '-------'
+    this.getAllprojects().forEach({
+        println it.name
+    })
+}
