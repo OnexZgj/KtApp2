@@ -38,6 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_home">
+
+        </activity>
     </application>
 
 </manifest>
